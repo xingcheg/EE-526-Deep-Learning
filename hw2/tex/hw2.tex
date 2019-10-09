@@ -1,0 +1,291 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{ifthen}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{bm}
+\usepackage{ulem}
+\usepackage{float}
+\usepackage{latexsym}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{amstext}
+\usepackage{latexsym}
+\usepackage{arydshln}
+\usepackage{longtable}
+\usepackage{enumerate}
+\usepackage{multirow}
+\usepackage{cases}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{subeqnarray}
+\usepackage{textcomp}
+\usepackage{hyperref}
+%\usepackage{subfigure}
+\usepackage{url}
+\usepackage{threeparttable}
+\usepackage{xr}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{subcaption}
+\usepackage{epstopdf}
+\usepackage{verbatim}
+\usepackage{xcolor}
+\usepackage[sort&compress]{natbib}
+\usepackage{bm}
+
+
+\captionsetup{font={small}}
+\geometry{left=2.0cm, right=2.0cm, top=2.5cm, bottom=2.5cm}
+
+\title{EE526 Homework 2}
+
+\author{Xingche Guo}
+
+\date{\today}
+
+\linespread{1.3}
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 1}
+
+\begin{align*}
+& \because \ f(z) = \log (1 + e^z) \\
+& \therefore \ f^{'}(z) = \frac{1}{1 + e^{-z}} \\
+& \therefore \ f^{''}(z) = \frac{e^{-z}}{(1+e^{-z})^2} > 0 \ \ \ \forall z \in \mathbb{R}
+\end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 2}
+
+\begin{equation*}
+\frac{d p_j}{d z_i} = 
+\left\{  
+\begin{aligned}
+\frac{ \sum_{k \neq i} e^{z_k  + z_i}  }{(\sum_{k=1}^n e^{z_k})^2 }, & \ \ for \ i=j \\
+\frac{  - e^{z_j  + z_i}  }{(\sum_{k=1}^n e^{z_k})^2 }, & \ \ for \ i \neq j
+\end{aligned}
+\right.
+\end{equation*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 3}
+
+Note that
+$$
+\frac{d p_j}{d z_i} = \frac{ \sum_{k=1}^n e^{z_k  + z_i} I(i=j)  - e^{z_j  + z_i}  }{(\sum_{k=1}^n e^{z_k})^2 } = p_i I(i=j) - p_i p_j.
+$$
+Therefore:
+\begin{align*}
+\frac{\partial J}{ \partial z_i} & = \sum_{j=1}^n \frac{\partial J}{ \partial p_j} \frac{\partial p_j}{ \partial z_i}  =
+\sum_{j=1}^n -\frac{y_j}{p_j} \bigg\{p_i I(i=j) - p_i p_j \bigg\} \\
+& =  -y_i + p_i (\sum_{j=1}^n y_j) = p_i - y_i
+\end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 4}
+
+\begin{equation*}
+X = \left(                        
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right), 
+Y = \left(                        
+\begin{matrix}
+1 & 0 \\
+0 & 1
+\end{matrix}
+\right), 
+W_0 =  \left(                        
+\begin{matrix}
+0 & 0 \\
+0 & 0
+\end{matrix}
+\right), 
+\pmb{b}_0 = (0,0)^T.
+\end{equation*}
+
+iter 1:
+$$Z_0 = W_0 X  + \pmb{b}_0 \pmb{1}^T = \left(                        
+\begin{matrix}
+0 & 0 \\
+0 & 0
+\end{matrix}
+\right), 
+$$
+
+$$
+P_0 = \mathrm{softmax}(Z_0) = \left(                        
+\begin{matrix}
+1/2 & 1/2 \\
+1/2 & 1/2
+\end{matrix}
+\right), 
+$$
+
+$$
+\frac{\partial J}{\partial Z_0} = \frac{1}{2} (P_0 - Y) =  \left(                        
+\begin{matrix}
+-1/4 & 1/4 \\
+1/4 & -1/4
+\end{matrix}
+\right), 
+$$
+
+$$
+\frac{\partial J}{\partial W_0} = \frac{\partial J}{\partial Z_0} \frac{\partial Z_0}{\partial W_0} = \frac{1}{2} (P_0 - Y) X^T = \left(                        
+\begin{matrix}
+-1/4 & 1/4 \\
+1/4 & -1/4
+\end{matrix}
+\right), 
+$$
+
+$$
+\frac{\partial J}{\partial \pmb{b}_0} = \frac{\partial J}{\partial Z_0} \frac{\partial Z_0}{\partial \pmb{b}_0} = \frac{1}{2} (P_0 - Y) \pmb{1}^T = (0,0)^T
+$$
+
+$$
+W_1 = W_0 - \tau \frac{\partial J}{\partial W_0} = \left(                        
+\begin{matrix}
+1/4 & -1/4 \\
+-1/4 & 1/4
+\end{matrix}
+\right); \  \ \ \
+\pmb{b}_1 = \pmb{b}_0 - \tau \frac{\partial J}{\partial \pmb{b}_0} =  (0,0)^T
+$$
+
+
+iter 2:
+$$Z_1 = W_1 X  + \pmb{b}_1 \pmb{1}^T = \left(                        
+\begin{matrix}
+1/4 & -1/4 \\
+-1/4 & 1/4
+\end{matrix}
+\right), 
+$$
+
+$$
+P_1 = \mathrm{softmax}(Z_1) = \left(                        
+\begin{matrix}
+0.622 & 0.378 \\
+0.378 & 0.622
+\end{matrix}
+\right), 
+$$
+
+$$
+\frac{\partial J}{\partial Z_1} = \frac{1}{2} (P_1 - Y) =  \left(                        
+\begin{matrix}
+-0.189 & 0.189 \\
+0.189 & -0.189
+\end{matrix}
+\right), 
+$$
+
+$$
+\frac{\partial J}{\partial W_1} = \frac{1}{2} (P_1 - Y) X^T = \left(                        
+\begin{matrix}
+-0.189 & 0.189 \\
+0.189 & -0.189
+\end{matrix}
+\right), 
+$$
+
+$$
+\frac{\partial J}{\partial \pmb{b}_1} =  \frac{1}{2} (P_1 - Y) \pmb{1}^T = (0,0)^T
+$$
+
+$$
+W_2 = W_1 - \tau \frac{\partial J}{\partial W_1} = \left(                        
+\begin{matrix}
+0.439 & -0.439 \\
+-0.439 & 0.439
+\end{matrix}
+\right); \  \ \ \
+\pmb{b}_2 = \pmb{b}_1 - \tau \frac{\partial J}{\partial \pmb{b}_1} =  (0,0)^T
+$$
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 5}
+
+Let $\mathrm{nIter} = 10000$, the two hidden layers have 50 and 25 neurons, then:
+\begin{table}[h]
+\begin{tabular}{ |c|ccc| } 
+\hline
+Learning Rate & $10^{-1}$ & $10^{-2}$  & $10^{-3}$   \\
+ \hline
+ Training Error Rate (normalized) &  0.0049 &  0.0297 & \textcolor{red}{0.1536}  \\ 
+ Testing Error Rate (normalized) & 0.1322  & 0.1101  & \textcolor{red}{0.1642}   \\ 
+ Total Time (Seconds) & 41 & 38 & 39 \\
+ \hline
+\end{tabular}
+\end{table}
+
+
+Let $\mathrm{nIter} = 10000$, the two hidden layers have 25 and 10 neurons, then:
+\begin{table}[h]
+\begin{tabular}{ |c|ccc| } 
+\hline
+Learning Rate & $10^{-1}$ & $10^{-2}$  & $10^{-3}$   \\
+ \hline
+ Training Error Rate (normalized) &  0.0042 &  0.0369 & \textcolor{red}{0.2834}  \\ 
+ Testing Error Rate (normalized) & 0.1368  & 0.1192  & \textcolor{red}{0.2541}   \\ 
+ Total Time (Seconds) & 22 & 22 & 22 \\
+ \hline
+\end{tabular}
+\end{table}
+
+\textcolor{red}{red number} means obtain the maximum iteration number/the algorithm fail to converge.
+
+
+
+
+
+\section*{Problem 6}
+
+$X$ is standardized, $\mathrm{batch \ size} = 256$, then:
+
+\begin{table}[h]
+\begin{tabular}{cccc} 
+\hline
+Models ($\mathrm{nIter} = 2\times10^4$) & Learning Rate &Training Error & Testing Error \\
+\hline
+ \hline
+ Input $\rightarrow$ (10, Linear) & 0.1 & $6.13\%$ & $7.52\%$ \\
+  Input $\rightarrow$ (50, ReLU)   $\rightarrow$ (10, Linear) & 0.25 & $0.00\%$ & $3.03\%$ \\
+  Input $\rightarrow$ (100, ReLU)  $\rightarrow$ (10, Linear) & 0.25 & $0.00\%$ & $2.60\%$ \\
+   Input $\rightarrow$ (140, ReLU)   $\rightarrow$ (10, Linear) & 0.25 & $0.00\%$ & $2.93\%$ \\
+    Input $\rightarrow$ (50, ReLU) $\rightarrow$ (50, ReLU)  $\rightarrow$ (10, Linear) & 0.1 & $0.13\%$ & $3.84\%$ \\
+    Input $\rightarrow$ (100, ReLU) $\rightarrow$ (20, ReLU)  $\rightarrow$ (10, Linear) & 0.1 & $0.23\%$ & $4.05\%$ \\
+    \hline
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
