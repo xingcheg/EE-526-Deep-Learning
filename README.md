@@ -1,2 +1,14 @@
 # EE-526-Deep-Learning
 Deep Learning Course Homework and Project
+
+## HW1
+Machine Learning Basics (Stochastic gradient descent / Perceptron algorithm / Logistic regression )
+
+## HW2
+Neural Network Basics (Forward & Backward propagation / coding for [ Spambase dataset / MNIST dataset ]
+
+## HW3
+Neural Network (Implement Tensorflow & Keras) [  MNIST dataset ]
+
+## HW
+Convolutional Neural Network (CNN) and Recurrent Neural Network (RNN)  [Fashion MNIST dataset]
