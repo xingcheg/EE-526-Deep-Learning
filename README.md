@@ -10,5 +10,5 @@ Neural Network Basics (Forward & Backward propagation / coding for [ Spambase da
 ## HW3
 Neural Network (Implement Tensorflow & Keras) [  MNIST dataset ]
 
-## HW
+## HW4
 Convolutional Neural Network (CNN) [Fashion MNIST dataset] and and Recurrent Neural Network (RNN) for time series prediction.
