@@ -1,5 +1,4 @@
 import numpy as np
-# import matplotlib.pyplot as plt
 
 
 # ------------------------------------------------------------------------
@@ -100,12 +99,10 @@ def reward(s, a):
 
 
 # SARSA algorithm for estimating the optimal action-value
-def SARSA(s, gamma, N):
+def SARSA(s, gamma, alpha, N):
     Q = np.zeros([2, 2])
-    Ns = np.zeros([2, 2])
     a = 1 if np.random.binomial(1, 0.5, 1) == 0 else 2
     for t in range(N):
-        Ns[s, a-1] += 1
         r = reward(s, a)
         s1 = rule(s, a)
         flag = np.random.binomial(1, 1/np.sqrt(t + 1), 1)
@@ -113,33 +110,31 @@ def SARSA(s, gamma, N):
             a1 = 1 if Q[s1, 0] > Q[s1, 1] else 2
         else:
             a1 = 1 if np.random.binomial(1, 0.5, 1) == 0 else 2
-        Q[s, a-1] += (r + gamma * Q[s1, a1-1] - Q[s, a-1]) / Ns[s, a-1]
+        Q[s, a-1] += (r + gamma * Q[s1, a1-1] - Q[s, a-1]) * alpha
         s = s1
         a = a1
     return Q
 
 
 # Q learning algorithm for estimating the optimal action-value
-def Q_learning(s, gamma, N):
+def Q_learning(s, gamma, alpha, N):
     Q = np.zeros([2, 2])
-    Ns = np.zeros([2, 2])
     for t in range(N):
         flag = np.random.binomial(1, 1/np.sqrt(t + 1), 1)
         if flag == 0:
             a = 1 if Q[s, 0] > Q[s, 1] else 2
         else:
             a = 1 if np.random.binomial(1, 0.5, 1) == 0 else 2
-        Ns[s, a-1] += 1
         r = reward(s, a)
         s1 = rule(s, a)
-        Q[s, a-1] += (r + gamma * max(Q[s1, 0], Q[s1, 1]) - Q[s, a-1]) / Ns[s, a-1]
+        Q[s, a-1] += (r + gamma * max(Q[s1, 0], Q[s1, 1]) - Q[s, a-1]) * alpha
         s = s1
     return Q
 
 
 # policy control results
-SARSA(0, 0.75, 50000)
-Q_learning(0, 0.75, 50000)
+SARSA(0, 0.75, 0.1, 50000)
+Q_learning(0, 0.75, 0.1, 50000)
 
 
 

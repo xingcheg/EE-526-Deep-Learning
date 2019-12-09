@@ -172,10 +172,11 @@ The estimated value function $v_{\pi}(s)$ based on  5-step temporal difference p
 $$  (v_{\pi}(0), v_{\pi}(1)) = (5.59, 6.39). $$
 
 \subsection*{(d), (e)}
+For learning rate $\alpha = 0.1$, exploration probability $\epsilon_t = t^{-1/2}$, number of time $N = 50000$: \\
 The optimal action-value function $q_{*}(s, a)$ estimated based on SARSA algorithm is:
-$$ (q_{*}(0, 1), q_{*}(0, 2), q_{*}(1, 1), q_{*}(1, 2)) = (9.27, 13.12, 11.88, 10.93). $$
+$$ (q_{*}(0, 1), q_{*}(0, 2), q_{*}(1, 1), q_{*}(1, 2)) = (10.73, 14.23, 12.88, 12.29). $$
 The optimal action-value function $q_{*}(s, a)$ estimated based on Q-learning algorithm is:
-$$ (q_{*}(0, 1), q_{*}(0, 2), q_{*}(1, 1), q_{*}(1, 2)) = (8.49, 13.50, 12.28, 10.35). $$
+$$ (q_{*}(0, 1), q_{*}(0, 2), q_{*}(1, 1), q_{*}(1, 2)) = (11.06, 14.28, 12.65, 12.20). $$
 Both of the methods indicate that:
 
 \begin{equation*}
