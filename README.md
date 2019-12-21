@@ -17,4 +17,4 @@ Convolutional Neural Network (CNN) [Fashion MNIST dataset] and and Recurrent Neu
 Reinforcement Learning Basics (Policy evaluation / policy control in model based / model free cases) [ SARSA / Q-Learning]. 
 
 ## Final Project
-Deep Reinforcement Learning: Double Deep Q-Network (Double DQN) [OpenAI/Gym/Acrobot-v1]
+Deep Reinforcement Learning: Double Deep Q-Network (Double DQN) [Acrobot-v1]
