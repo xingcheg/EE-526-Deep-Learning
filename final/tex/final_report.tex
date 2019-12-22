@@ -108,9 +108,9 @@ All the details of the double DQN algorithm can be found in Algorithm 1.
 \begin{algorithmic} [1]
 \STATE Initialize replay memory D to capacity 10000, batch size = 50; 
 \STATE Create two NN (current-net \& target-net) as the initial function approximation of $Q(s, a)$ and $Q_{\mathrm{target}}(s, a)$.
+\STATE Set $\mathrm{TotalStep} = 0$;
 \FOR{Episode $= 1, \cdots , 2000$}
     \STATE Initialize state $S$;
-    \STATE Set $\mathrm{TotalStep} = 0$;
     \FOR{t $= 1, \cdots , 2000$}
     \STATE Choose action A based on $\epsilon$-greedy algorithm with $\epsilon$;
     \STATE Execute $A$ in environment, observe $R$, $S^{'}$, and $\mathrm{terminated}$ (i.e. termination status);
